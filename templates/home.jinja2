@@ -1,0 +1,17 @@
+{% extends 'base.jinja2' %}
+
+{% block head %}
+  <meta charset="UTF-8">
+  <title>Welcome Flask!</title>
+{% endblock %}
+
+{% block body %}
+  <h1>Welcome Flask!</h1>
+  <h3>Posts:</h3>
+  <ul>
+    {% for post_id, post in POSTS.items() %}
+      <li><a href="{{ url_for('posts', post_id=post_id) }}">{{ post['title'] }}</a></li>
+    {% endfor %}
+  </ul>
+  <a href="{{ url_for('submit') }}"><input type="button" value="Create New Post"></a>
+{% endblock %}
