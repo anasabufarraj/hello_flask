@@ -1,5 +1,7 @@
 #!./venv/bin/python3.7
-# © Anas Abu Farraj
+# ------------------------------------------------------------------------------
+#  Copyright (c) 2019. Anas Abu Farraj.
+# ------------------------------------------------------------------------------
 """Learning Flask"""
 
 from flask import Flask, render_template, request, url_for, redirect
@@ -22,7 +24,7 @@ POSTS = {
 @APP.route('/')
 def home():
     """Returns home page."""
-    return render_template('home.jinja2', POSTS=POSTS)
+    return render_template('home.html', POSTS=POSTS)
 
 
 @APP.route('/post/<int:post_id>')
@@ -30,9 +32,9 @@ def posts(post_id):
     """Returns posts pages if found, otherwise returns 404 page."""
     post = POSTS.get(post_id)  # Returns None if key value is not found.
     if not post:
-        return render_template('404.jinja2', message='Oops! Page not found', post_id=post_id)
+        return render_template('404.html', message='Oops! Page not found', post_id=post_id)
 
-    return render_template('posts.jinja2', post=post)
+    return render_template('posts.html', post=post)
 
 
 @APP.route('/post/create', methods=['GET', 'POST'])
@@ -46,8 +48,8 @@ def submit():
 
         return redirect(url_for('posts', post_id=post_id))
 
-    return render_template('form.jinja2')
+    return render_template('form.html')
 
 
 if __name__ == '__main__':
-    APP.run()
+    APP.run(DEBUG=False)
