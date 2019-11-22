@@ -1,4 +1,4 @@
-#!./venv/bin/python3.7
+#!/usr/bin/env python
 # ------------------------------------------------------------------------------
 #  Copyright (c) 2019. Anas Abu Farraj.
 # ------------------------------------------------------------------------------
@@ -22,9 +22,9 @@ POSTS = {
 
 
 @APP.route('/')
-def home():
-    """Returns home page."""
-    return render_template('home.html', POSTS=POSTS)
+def index():
+    """Returns index page."""
+    return render_template('index.html', POSTS=POSTS)
 
 
 @APP.route('/post/<int:post_id>')
@@ -32,7 +32,7 @@ def posts(post_id):
     """Returns posts pages if found, otherwise returns 404 page."""
     post = POSTS.get(post_id)  # Returns None if key value is not found.
     if not post:
-        return render_template('404.html', message='Oops! Page not found', post_id=post_id)
+        return render_template('404.html', message='Oops! Page not found')
 
     return render_template('posts.html', post=post)
 
@@ -52,4 +52,4 @@ def submit():
 
 
 if __name__ == '__main__':
-    APP.run(DEBUG=False)
+    APP.run()
